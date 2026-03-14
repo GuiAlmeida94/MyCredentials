@@ -19,7 +19,7 @@ def find_file(filename):
     except: return None
     return None
 
-# --- Custom CSS for Cards and Sidebar ---
+# --- Custom CSS ---
 st.markdown("""
     <style>
     .cert-card {
@@ -66,12 +66,11 @@ with st.sidebar:
             )
     
     if not actual_en and not actual_pt:
-        st.warning("⚠️ CV files not found in GitHub. Please check filenames.")
+        st.warning("⚠️ CV files not found in GitHub.")
 
     st.divider()
     st.header("🔍 Filters")
     
-    # Updated Database with Imperial College "In Progress"
     certificates = [
         {
             "title": "Professional Certificate in Data Analytics", 
@@ -123,10 +122,3 @@ with st.sidebar:
 
 # --- Main Gallery ---
 st.title("📜 Professional Credentials")
-st.write("Verified certificates and academic background.")
-
-filtered_certs = [c for c in certificates if selected_category == "All" or c["category"] == selected_category]
-cols = st.columns(2)
-
-for i, cert in enumerate(filtered_certs):
-    with cols[i % 2]:
