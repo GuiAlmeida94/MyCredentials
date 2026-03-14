@@ -101,7 +101,7 @@ with st.sidebar:
         },
         {
             "title": "Master in Data Science - Academic Transcript", 
-            "file": "Transcript - Guilherme Oyakawa De Almeida.pdf",
+            "file": "Transcript - Guilherme Oyakawa De Almeida.jpg",
             "issuer": "Rome Business School", 
             "category": "Academic",
             "status": "Completed"
