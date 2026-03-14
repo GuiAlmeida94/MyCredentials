@@ -54,6 +54,13 @@ with st.sidebar:
     if actual_pt:
         with open(actual_pt, "rb") as f:
             st.download_button(label="🇧🇷 Download CV (Português)", data=f.read(), file_name=actual_pt, mime="application/pdf")
+
+    # Italian Version CV
+    cv_it = "Italiano-Guilherme-Oyakawa-Almeida-2026.pdf"
+    actual_it = find_file(cv_it)
+    if actual_it:
+        with open(actual_it, "rb") as f:
+            st.download_button(label="🇮🇹 Download CV (Italiano)", data=f.read(), file_name=actual_it, mime="application/pdf")
     
     st.divider()
     
