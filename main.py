@@ -12,7 +12,6 @@ st.set_page_config(
 def find_file(filename):
     if not filename: return None
     try:
-        # Busca na raiz do repositório
         files_in_dir = os.listdir('.')
         for f in files_in_dir:
             if f.lower() == filename.lower():
@@ -40,39 +39,44 @@ st.markdown("""
 
 # --- Sidebar: CV Downloads & Filters ---
 with st.sidebar:
-    st.header("📄 Download CV / Resume")
+    st.header("📄 Downloads")
     
-    # English Version
+    # English Version CV
     cv_en = "English-Guilherme-Oyakawa-Almeida-2026.pdf"
     actual_en = find_file(cv_en)
     if actual_en:
         with open(actual_en, "rb") as f:
-            st.download_button(
-                label="🇬🇧 Download CV (English)",
-                data=f.read(),
-                file_name=actual_en,
-                mime="application/pdf"
-            )
+            st.download_button(label="🇬🇧 Download CV (English)", data=f.read(), file_name=actual_en, mime="application/pdf")
     
-    # Portuguese Version
+    # Portuguese Version CV
     cv_pt = "Portugues-Guilherme-Oyakawa-Almeida-2026.pdf"
     actual_pt = find_file(cv_pt)
     if actual_pt:
         with open(actual_pt, "rb") as f:
-            st.download_button(
-                label="🇧🇷 Download CV (Português)",
-                data=f.read(),
-                file_name=actual_pt,
-                mime="application/pdf"
-            )
+            st.download_button(label="🇧🇷 Download CV (Português)", data=f.read(), file_name=actual_pt, mime="application/pdf")
     
-    if not actual_en and not actual_pt:
-        st.warning("⚠️ CV files not found in root.")
+    st.divider()
+    
+    # NOVO: Certificado de Inglês em Destaque
+    st.header("🌐 Language Proficiency")
+    eng_cert = "English_Certificate.pdf"
+    actual_eng = find_file(eng_cert)
+    if actual_eng:
+        with open(actual_eng, "rb") as f:
+            st.download_button(label="🏆 English Certificate (C1 Advanced)", data=f.read(), file_name=actual_eng, mime="application/pdf")
+        st.caption("EF SET Score: 69/100 (C2 in Reading, Listening & Speaking)")
 
     st.divider()
     st.header("🔍 Filters")
     
     certificates = [
+        {
+            "title": "English Certificate - C1 Advanced", 
+            "file": "English_Certificate.pdf", 
+            "issuer": "EF SET", 
+            "category": "Languages",
+            "status": "Completed"
+        },
         {
             "title": "Professional Certificate in Data Analytics", 
             "file": None, 
@@ -108,14 +112,7 @@ with st.sidebar:
             "issuer": "DataCamp", 
             "category": "Python",
             "status": "Completed"
-        },
-        {
-            "title": "Academic Transcript", 
-            "file": "Transcript - Guilherme Oyakawa De Almeida.jpg", 
-            "issuer": "Rome Business School", 
-            "category": "Academic",
-            "status": "Completed"
-        },
+        }
     ]
     
     categories = ["All"] + sorted(list(set(c["category"] for c in certificates)))
@@ -137,19 +134,22 @@ for i, cert in enumerate(filtered_certs):
         
         if cert.get("status") == "In Progress":
             st.info(f"⏳ **Status:** {cert['status']}")
-            st.write("Current Progress to Completion:")
             st.progress(cert['progress'] / 100)
-            st.caption(f"Currently at **{cert['progress']}%**.")
-            st.warning("Final document in production.")
+            st.caption(f"Progress: {cert['progress']}%")
         else:
-            actual_img = find_file(cert['file'])
-            if actual_img:
-                st.image(actual_img, use_container_width=True)
-                with open(actual_img, "rb") as f:
+            actual_file = find_file(cert['file'])
+            if actual_file:
+                # Se for PDF, mostramos um ícone ou mensagem, se for imagem, mostramos a imagem
+                if actual_file.lower().endswith('.pdf'):
+                    st.info("📄 PDF Document Available for Download")
+                else:
+                    st.image(actual_img if 'actual_img' in locals() else actual_file, use_container_width=True)
+                
+                with open(actual_file, "rb") as f:
                     st.download_button(
-                        label=f"⬇️ Download Certificate",
+                        label=f"⬇️ Download Document",
                         data=f.read(),
-                        file_name=actual_img,
+                        file_name=actual_file,
                         key=f"btn_{i}"
                     )
             else:
