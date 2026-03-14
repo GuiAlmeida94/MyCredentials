@@ -100,6 +100,13 @@ with st.sidebar:
             "status": "Completed"
         },
         {
+            "title": "Master in Data Science - Academic Transcript", 
+            "file": "NOME_EXATO_DO_TEU_TRANSCRIPT.pdf", # <- Substitui pelo nome real do ficheiro
+            "issuer": "Rome Business School", 
+            "category": "Academic",
+            "status": "Completed"
+        },
+        {
             "title": "Power BI Data Analyst", 
             "file": "DataCampCertification_PBI.jpg", 
             "issuer": "DataCamp", 
