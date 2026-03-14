@@ -8,7 +8,7 @@ st.set_page_config(
     layout="wide"
 )
 
-# --- Technical function to find files safely ---
+# --- Technical function to find files safely (Case Insensitive) ---
 def find_file(filename):
     if not filename: return None
     try:
@@ -19,7 +19,7 @@ def find_file(filename):
     except: return None
     return None
 
-# --- Custom CSS ---
+# --- Custom CSS for Cards and Sidebar ---
 st.markdown("""
     <style>
     .cert-card {
@@ -28,9 +28,11 @@ st.markdown("""
         padding: 20px;
         background-color: #f8f9fa;
         margin-bottom: 20px;
+        min-height: 250px;
     }
     .stDownloadButton > button {
         width: 100%;
+        border-radius: 5px;
     }
     </style>
 """, unsafe_allow_html=True)
@@ -64,21 +66,60 @@ with st.sidebar:
             )
     
     if not actual_en and not actual_pt:
-        st.warning("⚠️ CV files not found. Check names in GitHub.")
+        st.warning("⚠️ CV files not found in GitHub. Please check filenames.")
 
     st.divider()
     st.header("🔍 Filters")
     
+    # Updated Database with Imperial College "In Progress"
     certificates = [
-        {"title": "Master in Data Science", "file": "Certificate - GUILHERME OYAKAWA DE ALMEIDA.jpg", "issuer": "Rome Business School", "category": "Academic"},
-        {"title": "Power BI Data Analyst", "file": "DataCampCertification_PBI.jpg", "issuer": "DataCamp", "category": "Data BI"},
-        {"title": "SQL Data Analyst", "file": "DataCampCertification_SQL.jpg", "issuer": "DataCamp", "category": "SQL"},
-        {"title": "Python Data Analyst", "file": "certificate_python Data Analyst.jpg", "issuer": "DataCamp", "category": "Python"},
-        {"title": "Academic Transcript", "file": "Transcript - Guilherme Oyakawa De Almeida.jpg", "issuer": "Rome Business School", "category": "Academic"},
+        {
+            "title": "Professional Certificate in Data Analytics", 
+            "file": None, 
+            "issuer": "Imperial College Business School", 
+            "category": "Data BI",
+            "status": "In Progress",
+            "progress": 90
+        },
+        {
+            "title": "Master in Data Science", 
+            "file": "Certificate - GUILHERME OYAKAWA DE ALMEIDA.jpg", 
+            "issuer": "Rome Business School", 
+            "category": "Academic",
+            "status": "Completed"
+        },
+        {
+            "title": "Power BI Data Analyst", 
+            "file": "DataCampCertification_PBI.jpg", 
+            "issuer": "DataCamp", 
+            "category": "Data BI",
+            "status": "Completed"
+        },
+        {
+            "title": "SQL Data Analyst", 
+            "file": "DataCampCertification_SQL.jpg", 
+            "issuer": "DataCamp", 
+            "category": "SQL",
+            "status": "Completed"
+        },
+        {
+            "title": "Python Data Analyst", 
+            "file": "certificate_python Data Analyst.jpg", 
+            "issuer": "DataCamp", 
+            "category": "Python",
+            "status": "Completed"
+        },
+        {
+            "title": "Academic Transcript", 
+            "file": "Transcript - Guilherme Oyakawa De Almeida.jpg", 
+            "issuer": "Rome Business School", 
+            "category": "Academic",
+            "status": "Completed"
+        },
     ]
     
     categories = ["All"] + sorted(list(set(c["category"] for c in certificates)))
-    selected_category = st.selectbox("Category:", categories)
+    selected_category = st.selectbox("Select Category:", categories)
 
 # --- Main Gallery ---
 st.title("📜 Professional Credentials")
@@ -89,10 +130,3 @@ cols = st.columns(2)
 
 for i, cert in enumerate(filtered_certs):
     with cols[i % 2]:
-        actual_img = find_file(cert['file'])
-        if actual_img:
-            st.markdown(f'<div class="cert-card"><h3>{cert["title"]}</h3><p><b>{cert["issuer"]}</b></p></div>', unsafe_allow_html=True)
-            st.image(actual_img, use_container_width=True)
-            with open(actual_img, "rb") as f:
-                st.download_button(label=f"⬇️ Download Certificate", data=f, file_name=actual_img, key=f"btn_{i}")
-        st.divider()
