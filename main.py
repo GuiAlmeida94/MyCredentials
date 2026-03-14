@@ -12,6 +12,7 @@ st.set_page_config(
 def find_file(filename):
     if not filename: return None
     try:
+        # Busca na raiz do repositório
         files_in_dir = os.listdir('.')
         for f in files_in_dir:
             if f.lower() == filename.lower():
@@ -48,7 +49,7 @@ with st.sidebar:
         with open(actual_en, "rb") as f:
             st.download_button(
                 label="🇬🇧 Download CV (English)",
-                data=f,
+                data=f.read(),
                 file_name=actual_en,
                 mime="application/pdf"
             )
@@ -60,13 +61,13 @@ with st.sidebar:
         with open(actual_pt, "rb") as f:
             st.download_button(
                 label="🇧🇷 Download CV (Português)",
-                data=f,
+                data=f.read(),
                 file_name=actual_pt,
                 mime="application/pdf"
             )
     
     if not actual_en and not actual_pt:
-        st.warning("⚠️ CV files not found in GitHub.")
+        st.warning("⚠️ CV files not found in root.")
 
     st.divider()
     st.header("🔍 Filters")
@@ -122,3 +123,35 @@ with st.sidebar:
 
 # --- Main Gallery ---
 st.title("📜 Professional Credentials")
+st.write("Verified certificates and academic background.")
+
+filtered_certs = [c for c in certificates if selected_category == "All" or c["category"] == selected_category]
+cols = st.columns(2)
+
+for i, cert in enumerate(filtered_certs):
+    with cols[i % 2]:
+        st.markdown(f"""<div class="cert-card">
+            <h3>{cert['title']}</h3>
+            <p><b>Issuer:</b> {cert['issuer']} | <b>Category:</b> {cert['category']}</p>
+        </div>""", unsafe_allow_html=True)
+        
+        if cert.get("status") == "In Progress":
+            st.info(f"⏳ **Status:** {cert['status']}")
+            st.write("Current Progress to Completion:")
+            st.progress(cert['progress'] / 100)
+            st.caption(f"Currently at **{cert['progress']}%**.")
+            st.warning("Final document in production.")
+        else:
+            actual_img = find_file(cert['file'])
+            if actual_img:
+                st.image(actual_img, use_container_width=True)
+                with open(actual_img, "rb") as f:
+                    st.download_button(
+                        label=f"⬇️ Download Certificate",
+                        data=f.read(),
+                        file_name=actual_img,
+                        key=f"btn_{i}"
+                    )
+            else:
+                st.error(f"⚠️ Not found: {cert['file']}")
+        st.divider()
