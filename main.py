@@ -101,7 +101,7 @@ with st.sidebar:
         },
         {
             "title": "Master in Data Science - Academic Transcript", 
-            "file": "NOME_EXATO_DO_TEU_TRANSCRIPT.pdf", # <- Substitui pelo nome real do ficheiro
+            "file": "Transcript - Guilherme Oyakawa De Almeida.pdf",
             "issuer": "Rome Business School", 
             "category": "Academic",
             "status": "Completed"
