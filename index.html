@@ -24,7 +24,6 @@
         box-sizing: border-box; 
     }
     
-    /* Center the entire layout */
     .layout-container { 
         display: flex; 
         flex-direction: row; 
@@ -34,7 +33,6 @@
         margin: 0 auto;
     }
 
-    /* Sticky Sidebar */
     .sidebar { 
         width: 280px; 
         flex-shrink: 0; 
@@ -53,28 +51,23 @@
         min-width: 0; 
     }
 
-    /* Typography & Sections */
     h1 { margin: 0 0 10px 0; font-size: 2.2rem; color: #111; }
     h2 { margin: 30px 0 15px 0; font-size: 1.5rem; color: #111; border-bottom: 2px solid var(--blue); padding-bottom: 5px; display: inline-block; }
     h3 { margin-top: 0; color: #111; font-size: 1.2rem;}
     hr { border: 0; border-top: 1px solid var(--border); margin: 20px 0; }
     .section-desc { color: var(--text-muted); margin-bottom: 20px; font-style: italic; }
     
-    /* Buttons & Inputs */
     .btn { display: block; width: 100%; text-align: center; background: #fff; border: 1px solid var(--border); padding: 10px; margin-bottom: 10px; border-radius: 5px; text-decoration: none; color: var(--text-main); font-size: 0.95rem; cursor: pointer; transition: all 0.2s; box-sizing: border-box; }
     .btn:hover { border-color: var(--blue); color: var(--blue); }
     select { width: 100%; padding: 10px; border-radius: 5px; border: 1px solid var(--border); font-size: 1rem; margin-top: 10px; color: var(--text-main); }
     
-    /* Grid Layouts */
     .grid-large { display: flex; flex-direction: column; gap: 25px; margin-top: 10px; }
     .grid-small { display: grid; grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); gap: 20px; margin-top: 10px; }
 
-    /* Card Styling */
     .card-wrapper { display: block; width: 100%; box-sizing: border-box; }
     .cert-card { border: 1px solid var(--border); border-radius: 10px; padding: 20px; background-color: var(--bg-card); display: flex; flex-direction: column; box-sizing: border-box; height: 100%; transition: transform 0.2s; }
     .cert-card:hover { transform: translateY(-3px); border-color: #cbd3e0; }
     
-    /* Academic Highlight (Weight 3) */
     .tier-academic { border-left: 5px solid var(--gold); }
     
     .cert-img { width: 100%; border-radius: 5px; border: 1px solid #ddd; margin-bottom: 15px; object-fit: contain; max-height: 350px; background: #fff; display: block; }
@@ -89,7 +82,6 @@
     .progress-container { width: 100%; background-color: #e9ecef; border-radius: 5px; margin-top: 10px; height: 10px; }
     .progress-bar { width: 90%; background-color: var(--blue); height: 100%; border-radius: 5px; }
 
-    /* Mobile Responsive */
     @media (max-width: 900px) {
         .layout-container { flex-direction: column; align-items: center; }
         .sidebar { position: relative; top: 0; width: 100%; border-bottom: 1px solid var(--border); }
@@ -122,7 +114,7 @@
         <p style="color: var(--text-muted); font-size: 1.1rem;">Validated expertise in Data Science and Business Intelligence.</p>
 
         <section id="sec-academic">
-            <h2>🎓 Higher Education (Weight 3)</h2>
+            <h2>🎓 Higher Education</h2>
             <p class="section-desc">Master's degrees and postgraduate academic background.</p>
             <div class="grid-large">
                 <div class="card-wrapper" data-category="Academic">
@@ -146,14 +138,14 @@
         </section>
 
         <section id="sec-professional">
-            <h2>🏆 Professional Specializations (Weight 2)</h2>
+            <h2>🏆 Professional Specializations</h2>
             <p class="section-desc">Certifications from globally recognized institutions.</p>
             <div class="grid-large">
                 <div class="card-wrapper" data-category="Data BI">
                     <div class="cert-card">
                         <div class="cert-title">Professional Certificate in Data Analytics</div>
                         <div class="cert-meta"><b>Issuer:</b> Imperial College London | <b>Focus:</b> Strategic Analytics</div>
-                        <div class="status-info" style="background: #fff3cd; border-color: #ffeeba; color:#856404;">⏳ <b>Status:</b> Final Phase (Completion 2026)</div>
+                        <div class="status-info" style="background: #fff3cd; border-color: #ffeeba; color:#856404;">⏳ <b>Status:</b> Final Phase (Completion May 2026)</div>
                         <div class="progress-container"><div class="progress-bar"></div></div>
                         <p style="font-size: 0.8rem; margin: 5px 0 15px 0; color: var(--text-muted);">Current Progress: 90%</p>
                     </div>
@@ -162,7 +154,7 @@
         </section>
 
         <section id="sec-technical">
-            <h2>🛠️ Technical Skills & Languages (Weight 1)</h2>
+            <h2>🛠️ Technical Skills & Languages</h2>
             <p class="section-desc">Tool-specific mastery and communication proficiency.</p>
             <div class="grid-small">
                 <div class="card-wrapper" data-category="Languages">
@@ -202,7 +194,6 @@
 </div>
 
 <script>
-    /* Technical logic for filtering content */
     function filterCerts() {
         var selected = document.getElementById("categoryFilter").value;
         var cards = document.querySelectorAll(".card-wrapper");
