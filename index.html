@@ -3,7 +3,7 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Credentials</title>
+<title>Credentials | Guilherme Oyakawa</title>
 <style>
     :root { 
         --blue: #007bff; 
@@ -12,6 +12,7 @@
         --border: #e6e9ef; 
         --text-main: #333; 
         --text-muted: #666; 
+        --gold: #b8860b;
     }
 
     body { 
@@ -19,21 +20,21 @@
         margin: 0; 
         background: var(--bg-main); 
         color: var(--text-main); 
-        padding: 20px; /* Increased padding for better aesthetics */
+        padding: 20px; 
         box-sizing: border-box; 
     }
     
-    /* Center the entire layout on the screen */
+    /* Center the entire layout */
     .layout-container { 
         display: flex; 
         flex-direction: row; 
         gap: 30px; 
         align-items: flex-start; 
-        max-width: 1100px; /* Prevents stretching on large monitors */
-        margin: 0 auto;    /* Centers the container */
+        max-width: 1200px; 
+        margin: 0 auto;
     }
 
-    /* Sticky Sidebar implementation */
+    /* Sticky Sidebar */
     .sidebar { 
         width: 280px; 
         flex-shrink: 0; 
@@ -42,8 +43,8 @@
         border: 1px solid var(--border); 
         border-radius: 8px; 
         box-sizing: border-box; 
-        position: sticky; /* Keep it visible while scrolling */
-        top: 20px;        /* Distance from the top of the viewport */
+        position: sticky; 
+        top: 20px; 
         height: fit-content; 
     }
 
@@ -51,43 +52,48 @@
         flex-grow: 1; 
         min-width: 0; 
     }
-    
-    h2, h3 { margin-top: 0; color: #111; font-size: 1.2rem;}
-    h1 { margin-top: 0; margin-bottom: 5px; font-size: 2.2rem; color: #111; }
+
+    /* Typography & Sections */
+    h1 { margin: 0 0 10px 0; font-size: 2.2rem; color: #111; }
+    h2 { margin: 30px 0 15px 0; font-size: 1.5rem; color: #111; border-bottom: 2px solid var(--blue); padding-bottom: 5px; display: inline-block; }
+    h3 { margin-top: 0; color: #111; font-size: 1.2rem;}
     hr { border: 0; border-top: 1px solid var(--border); margin: 20px 0; }
+    .section-desc { color: var(--text-muted); margin-bottom: 20px; font-style: italic; }
     
+    /* Buttons & Inputs */
     .btn { display: block; width: 100%; text-align: center; background: #fff; border: 1px solid var(--border); padding: 10px; margin-bottom: 10px; border-radius: 5px; text-decoration: none; color: var(--text-main); font-size: 0.95rem; cursor: pointer; transition: all 0.2s; box-sizing: border-box; }
     .btn:hover { border-color: var(--blue); color: var(--blue); }
-    
     select { width: 100%; padding: 10px; border-radius: 5px; border: 1px solid var(--border); font-size: 1rem; margin-top: 10px; color: var(--text-main); }
     
-    .grid { display: flex; flex-direction: column; gap: 20px; margin-top: 20px; max-width: 100%; }
+    /* Grid Layouts */
+    .grid-large { display: flex; flex-direction: column; gap: 25px; margin-top: 10px; }
+    .grid-small { display: grid; grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); gap: 20px; margin-top: 10px; }
+
+    /* Card Styling */
     .card-wrapper { display: block; width: 100%; box-sizing: border-box; }
-    .cert-card { border: 1px solid var(--border); border-radius: 10px; padding: 25px; background-color: var(--bg-card); display: flex; flex-direction: column; box-sizing: border-box; width: 100%; }
+    .cert-card { border: 1px solid var(--border); border-radius: 10px; padding: 20px; background-color: var(--bg-card); display: flex; flex-direction: column; box-sizing: border-box; height: 100%; transition: transform 0.2s; }
+    .cert-card:hover { transform: translateY(-3px); border-color: #cbd3e0; }
     
-    .cert-img { width: 100%; border-radius: 5px; border: 1px solid #ddd; margin-bottom: 15px; object-fit: contain; max-height: 400px; background: #fff; display: block; }
-    .cert-title { font-size: 1.25rem; font-weight: bold; margin-bottom: 10px; color: #111; }
-    .cert-meta { font-size: 0.95rem; color: var(--text-muted); line-height: 1.5; margin-bottom: 15px; }
+    /* Academic Highlight (Weight 3) */
+    .tier-academic { border-left: 5px solid var(--gold); }
     
-    .btn-download { display: block; width: 100%; text-align: center; background: #fff; border: 1px solid var(--blue); color: var(--blue); padding: 10px; margin-top: auto; border-radius: 5px; text-decoration: none; font-weight: bold; font-size: 0.95rem; box-sizing: border-box;}
+    .cert-img { width: 100%; border-radius: 5px; border: 1px solid #ddd; margin-bottom: 15px; object-fit: contain; max-height: 350px; background: #fff; display: block; }
+    .cert-title { font-size: 1.2rem; font-weight: bold; margin-bottom: 8px; color: #111; }
+    .cert-meta { font-size: 0.9rem; color: var(--text-muted); line-height: 1.4; margin-bottom: 15px; }
+    
+    .btn-download { display: block; width: 100%; text-align: center; background: #fff; border: 1px solid var(--blue); color: var(--blue); padding: 10px; margin-top: auto; border-radius: 5px; text-decoration: none; font-weight: bold; font-size: 0.9rem; box-sizing: border-box;}
     .btn-download:hover { background: var(--blue); color: #fff; }
     
-    .status-info { background: #eef5ff; border: 1px solid #cce0ff; color: #004085; padding: 12px; border-radius: 5px; font-size: 0.95rem; margin-bottom: 15px; text-align: center; box-sizing: border-box;}
+    .status-info { background: #eef5ff; border: 1px solid #cce0ff; color: #004085; padding: 10px; border-radius: 5px; font-size: 0.9rem; margin-bottom: 12px; text-align: center; }
     
     .progress-container { width: 100%; background-color: #e9ecef; border-radius: 5px; margin-top: 10px; height: 10px; }
     .progress-bar { width: 90%; background-color: var(--blue); height: 100%; border-radius: 5px; }
-    .progress-text { font-size: 0.85rem; color: var(--text-muted); margin-top: 5px; }
 
-    /* Responsive adjustments */
-    @media (max-width: 800px) {
+    /* Mobile Responsive */
+    @media (max-width: 900px) {
         .layout-container { flex-direction: column; align-items: center; }
-        .sidebar { 
-            position: relative; /* Disable sticky on mobile for better UX */
-            top: 0;
-            width: 100%; 
-            border-right: none; 
-            border-bottom: 1px solid var(--border); 
-        }
+        .sidebar { position: relative; top: 0; width: 100%; border-bottom: 1px solid var(--border); }
+        .grid-small { grid-template-columns: 1fr; }
     }
 </style>
 </head>
@@ -100,97 +106,107 @@
         <a href="https://raw.githubusercontent.com/GuiAlmeida94/MyCredentials/main/Portugues-Guilherme-Oyakawa-Almeida-2026.pdf" class="btn" target="_blank" download>🇧🇷 CV (Português)</a>
         <a href="https://raw.githubusercontent.com/GuiAlmeida94/MyCredentials/main/Italiano-Guilherme-Oyakawa-Almeida-2026.pdf" class="btn" target="_blank" download>🇮🇹 CV (Italiano)</a>
         <hr>
-        <h2>🌐 Languages</h2>
-        <a href="https://raw.githubusercontent.com/GuiAlmeida94/MyCredentials/main/English_Certificate.pdf" class="btn" target="_blank" style="background:#fffcf0; border-color:#ffeeba;">🏆 English Certificate (C1)</a>
-        <p style="font-size: 0.8rem; color: #666; text-align: center; margin-top: 5px;">EF SET Score: 69/100<br>(C2 in Reading, Listening & Speaking)</p>
-        <hr>
         <h2>🔍 Filters</h2>
         <select id="categoryFilter" onchange="filterCerts()">
             <option value="All">All Categories</option>
+            <option value="Academic">Academic (Post-Grad)</option>
+            <option value="Data BI">Professional BI</option>
+            <option value="SQL">SQL Skills</option>
+            <option value="Python">Python Skills</option>
             <option value="Languages">Languages</option>
-            <option value="Data BI">Data BI</option>
-            <option value="Academic">Academic</option>
-            <option value="SQL">SQL</option>
-            <option value="Python">Python</option>
         </select>
     </div>
 
     <div class="main-content">
-        <h1>📜 Credentials</h1>
-        <p style="color: var(--text-muted); font-size: 1.1rem; margin-bottom: 25px;">Verified certificates and academic background.</p>
-        
-        <div class="grid" id="certGrid">
-            <div class="card-wrapper" data-category="Languages">
-                <div class="cert-card">
-                    <div class="cert-title">English Certificate - C1 Advanced</div>
-                    <div class="cert-meta"><b>Issuer:</b> EF SET | <b>Category:</b> Languages</div>
-                    <div class="status-info">📄 PDF Document Available</div>
-                    <a href="https://raw.githubusercontent.com/GuiAlmeida94/MyCredentials/main/English_Certificate.pdf" class="btn-download" target="_blank" download>⬇️ Download Document</a>
-                </div>
-            </div>
+        <h1>📜 Credentials & Certifications</h1>
+        <p style="color: var(--text-muted); font-size: 1.1rem;">Validated expertise in Data Science and Business Intelligence.</p>
 
-            <div class="card-wrapper" data-category="Data BI">
-                <div class="cert-card">
-                    <div class="cert-title">Professional Certificate in Data Analytics</div>
-                    <div class="cert-meta"><b>Issuer:</b> Imperial College | <b>Category:</b> Data BI</div>
-                    <div class="status-info" style="background: #fff; border-color: #ddd; color:#333;">⏳ <b>Status:</b> In Progress</div>
-                    <div class="progress-container"><div class="progress-bar"></div></div>
-                    <div class="progress-text">Progress: 90%</div>
+        <section id="sec-academic">
+            <h2>🎓 Higher Education (Weight 3)</h2>
+            <p class="section-desc">Master's degrees and postgraduate academic background.</p>
+            <div class="grid-large">
+                <div class="card-wrapper" data-category="Academic">
+                    <div class="cert-card tier-academic">
+                        <div class="cert-title">Master in Data Science</div>
+                        <div class="cert-meta"><b>Issuer:</b> Rome Business School | <b>Location:</b> Italy</div>
+                        <img src="https://raw.githubusercontent.com/GuiAlmeida94/MyCredentials/main/Certificate%20-%20GUILHERME%20OYAKAWA%20DE%20ALMEIDA.jpg" alt="Master Certificate" class="cert-img">
+                        <a href="https://raw.githubusercontent.com/GuiAlmeida94/MyCredentials/main/Certificate%20-%20GUILHERME%20OYAKAWA%20DE%20ALMEIDA.jpg" class="btn-download" target="_blank">🖼️ View Full Certificate</a>
+                    </div>
                 </div>
-            </div>
 
-            <div class="card-wrapper" data-category="Academic">
-                <div class="cert-card">
-                    <div class="cert-title">Master in Data Science</div>
-                    <div class="cert-meta"><b>Issuer:</b> Rome Business School | <b>Category:</b> Academic</div>
-                    <img src="https://raw.githubusercontent.com/GuiAlmeida94/MyCredentials/main/Certificate%20-%20GUILHERME%20OYAKAWA%20DE%20ALMEIDA.jpg" alt="Master Certificate" class="cert-img">
-                    <a href="https://raw.githubusercontent.com/GuiAlmeida94/MyCredentials/main/Certificate%20-%20GUILHERME%20OYAKAWA%20DE%20ALMEIDA.jpg" class="btn-download" target="_blank">🖼️ View Certificate</a>
+                <div class="card-wrapper" data-category="Academic">
+                    <div class="cert-card tier-academic">
+                        <div class="cert-title">Master - Academic Transcript</div>
+                        <div class="cert-meta"><b>Issuer:</b> Rome Business School | <b>Validation:</b> Official Record</div>
+                        <img src="https://raw.githubusercontent.com/GuiAlmeida94/MyCredentials/main/Transcript%20-%20Guilherme%20Oyakawa%20De%20Almeida.jpg" alt="Transcript" class="cert-img">
+                        <a href="https://raw.githubusercontent.com/GuiAlmeida94/MyCredentials/main/Transcript%20-%20Guilherme%20Oyakawa%20De%20Almeida.jpg" class="btn-download" target="_blank">🖼️ View Transcript</a>
+                    </div>
                 </div>
             </div>
+        </section>
 
-            <div class="card-wrapper" data-category="Academic">
-                <div class="cert-card">
-                    <div class="cert-title">Master - Academic Transcript</div>
-                    <div class="cert-meta"><b>Issuer:</b> Rome Business School | <b>Category:</b> Academic</div>
-                    <img src="https://raw.githubusercontent.com/GuiAlmeida94/MyCredentials/main/Transcript%20-%20Guilherme%20Oyakawa%20De%20Almeida.jpg" alt="Transcript" class="cert-img">
-                    <a href="https://raw.githubusercontent.com/GuiAlmeida94/MyCredentials/main/Transcript%20-%20Guilherme%20Oyakawa%20De%20Almeida.jpg" class="btn-download" target="_blank">🖼️ View Transcript</a>
+        <section id="sec-professional">
+            <h2>🏆 Professional Specializations (Weight 2)</h2>
+            <p class="section-desc">Certifications from globally recognized institutions.</p>
+            <div class="grid-large">
+                <div class="card-wrapper" data-category="Data BI">
+                    <div class="cert-card">
+                        <div class="cert-title">Professional Certificate in Data Analytics</div>
+                        <div class="cert-meta"><b>Issuer:</b> Imperial College London | <b>Focus:</b> Strategic Analytics</div>
+                        <div class="status-info" style="background: #fff3cd; border-color: #ffeeba; color:#856404;">⏳ <b>Status:</b> Final Phase (Completion 2026)</div>
+                        <div class="progress-container"><div class="progress-bar"></div></div>
+                        <p style="font-size: 0.8rem; margin: 5px 0 15px 0; color: var(--text-muted);">Current Progress: 90%</p>
+                    </div>
                 </div>
             </div>
+        </section>
 
-            <div class="card-wrapper" data-category="Data BI">
-                <div class="cert-card">
-                    <div class="cert-title">Power BI Data Analyst</div>
-                    <div class="cert-meta"><b>Issuer:</b> DataCamp | <b>Category:</b> Data BI</div>
-                    <img src="https://raw.githubusercontent.com/GuiAlmeida94/MyCredentials/main/DataCampCertification_PBI.jpg" alt="Power BI Certificate" class="cert-img">
-                    <a href="https://raw.githubusercontent.com/GuiAlmeida94/MyCredentials/main/DataCampCertification_PBI.jpg" class="btn-download" target="_blank">🖼️ View Certificate</a>
+        <section id="sec-technical">
+            <h2>🛠️ Technical Skills & Languages (Weight 1)</h2>
+            <p class="section-desc">Tool-specific mastery and communication proficiency.</p>
+            <div class="grid-small">
+                <div class="card-wrapper" data-category="Languages">
+                    <div class="cert-card">
+                        <div class="cert-title">English C1 Advanced</div>
+                        <div class="cert-meta"><b>Issuer:</b> EF SET | <b>Score:</b> 69/100</div>
+                        <a href="https://raw.githubusercontent.com/GuiAlmeida94/MyCredentials/main/English_Certificate.pdf" class="btn-download" target="_blank">⬇️ Download PDF</a>
+                    </div>
                 </div>
-            </div>
 
-            <div class="card-wrapper" data-category="SQL">
-                <div class="cert-card">
-                    <div class="cert-title">SQL Data Analyst</div>
-                    <div class="cert-meta"><b>Issuer:</b> DataCamp | <b>Category:</b> SQL</div>
-                    <img src="https://raw.githubusercontent.com/GuiAlmeida94/MyCredentials/main/DataCampCertification_SQL.jpg" alt="SQL Certificate" class="cert-img">
-                    <a href="https://raw.githubusercontent.com/GuiAlmeida94/MyCredentials/main/DataCampCertification_SQL.jpg" class="btn-download" target="_blank">⬇️ Download/View Document</a>
+                <div class="card-wrapper" data-category="Data BI">
+                    <div class="cert-card">
+                        <div class="cert-title">Power BI Data Analyst</div>
+                        <div class="cert-meta"><b>Issuer:</b> DataCamp</div>
+                        <a href="https://raw.githubusercontent.com/GuiAlmeida94/MyCredentials/main/DataCampCertification_PBI.jpg" class="btn-download" target="_blank">🖼️ View Cert</a>
+                    </div>
                 </div>
-            </div>
 
-            <div class="card-wrapper" data-category="Python">
-                <div class="cert-card">
-                    <div class="cert-title">Python Data Analyst</div>
-                    <div class="cert-meta"><b>Issuer:</b> DataCamp | <b>Category:</b> Python</div>
-                    <img src="https://raw.githubusercontent.com/GuiAlmeida94/MyCredentials/main/certificate_python%20Data%20Analyst.jpg" alt="Python Certificate" class="cert-img">
-                    <a href="https://raw.githubusercontent.com/GuiAlmeida94/MyCredentials/main/certificate_python%20Data%20Analyst.jpg" class="btn-download" target="_blank">🖼️ View Certificate</a>
+                <div class="card-wrapper" data-category="SQL">
+                    <div class="cert-card">
+                        <div class="cert-title">SQL Data Analyst</div>
+                        <div class="cert-meta"><b>Issuer:</b> DataCamp</div>
+                        <a href="https://raw.githubusercontent.com/GuiAlmeida94/MyCredentials/main/DataCampCertification_SQL.jpg" class="btn-download" target="_blank">🖼️ View Cert</a>
+                    </div>
+                </div>
+
+                <div class="card-wrapper" data-category="Python">
+                    <div class="cert-card">
+                        <div class="cert-title">Python Data Analyst</div>
+                        <div class="cert-meta"><b>Issuer:</b> DataCamp</div>
+                        <a href="https://raw.githubusercontent.com/GuiAlmeida94/MyCredentials/main/certificate_python%20Data%20Analyst.jpg" class="btn-download" target="_blank">🖼️ View Cert</a>
+                    </div>
                 </div>
             </div>
-        </div>
+        </section>
     </div>
 </div>
 
 <script>
+    /* Technical logic for filtering content */
     function filterCerts() {
         var selected = document.getElementById("categoryFilter").value;
         var cards = document.querySelectorAll(".card-wrapper");
+        
         cards.forEach(function(card) {
             if (selected === "All" || card.getAttribute("data-category") === selected) {
                 card.style.display = "block";
